@@ -1,0 +1,3 @@
+rootProject.name = 'ledge_app'
+
+include ':app'
