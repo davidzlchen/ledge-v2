@@ -1,47 +1,53 @@
 pragma solidity ^0.4.16;
 
 contract ElectronicHealthRecord {
-  struct GeneralInformation {
-    bytes32 name;
-    bytes32 birthday;
-    uint heightFt;
-    uint heightIn;
-    uint weight;
-  }
+    struct GeneralInformation {
+        bytes32 fileHash;
+    }
 
-  struct InsuranceInfo {
-    bytes32 primaryInsurance;
-    bytes32 otherInsurance;
-    bytes32 primaryPhysician;
-    bytes32 otherPhysician;
-    bytes32 pharmacy;
-  }
+    struct InsuranceInfo {
+        bytes32 fileHash;
+    }
 
-  struct EmergencyContact {
-    bytes32 contactName;
-    bytes32 relationship;
-    bytes32 contactPhoneNumber;
-  }
+    struct EmergencyContact {
+        bytes32 fileHash;
+    }
 
-  struct MedicalHistory {
-    bytes32 medicalConditions;
-    bytes32 allergies;
-    bytes32 symptoms;
-    bytes32 illness;
-    bytes32 surgery;
-  }
+    struct MedicalHistory {
+        bytes32 fileHash;
+    }
 
-  struct PersonalHealthRecord {
-    GeneralInformation generalInformation;
-    InsuranceInfo insuranceInfo;
-    EmergencyContact emergencyContact;
-    MedicalHistory medicalHistory;
-  }
+    struct PersonalHealthRecord {
+        bytes32 fileHash;
+        GeneralInformation generalInfo;
+        InsuranceInfo insuranceInfo;
+        EmergencyContact emergencyContact;
+        MedicalHistory medicalHistory;
+    }
 
-  PersonalHealthRecord healthRecord;
+    PersonalHealthRecord healthRecord;
 
-  public function ElectronicHealthRecord() {
-    healthRecord.medicalHistory.medicalConditions = "yes";
-  }
+    function ElectronicHealthRecord(bytes32 phrHash, bytes32 genHash, bytes32 insurHash, bytes32 emerHash, bytes32 medHash) public {
+        healthRecord.fileHash = phrHash;
+        healthRecord.generalInfo.fileHash = genHash;
+        healthRecord.insuranceInfo.fileHash = insurHash;
+        healthRecord.emergencyContact.fileHash = emerHash;
+        healthRecord.medicalHistory.fileHash = medHash;
+    }
 
+    function setGenHash(bytes32 hash) public {
+        healthRecord.generalInfo.fileHash = hash;
+    }
+
+    function setInsurHash(bytes32 hash) public {
+        healthRecord.insuranceInfo.fileHash = hash;
+    }
+
+    function setEmerHash(bytes32 hash) public {
+        healthRecord.emergencyContact.fileHash = hash;
+    }
+    
+    function setMedhash(bytes32 hash) public { 
+        healthRecord.medicalHistory.fileHash = hash;
+    }
 }
